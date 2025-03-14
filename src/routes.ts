@@ -1,9 +1,9 @@
-import type { Router } from "express";
-import express from "express";
-import hello from "./module/hello/hello.controller";
+import type { Router } from 'express'
+import express from 'express'
+import hello from './module/hello/hello.controller'
 
-const routes: Router = express.Router();
+const routes: Router = express.Router()
 
-routes.use("/hello", hello);
+routes.use('/hello', hello)
 
-export default routes;
+export default routes

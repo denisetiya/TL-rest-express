@@ -1,5 +1,5 @@
-import { describe, it } from "node:test";
+import { describe, it } from 'node:test'
 
-describe("endpoint", () => {
-  it("success", () => {});
-});
+describe('endpoint', () => {
+  it('success', () => {})
+})
