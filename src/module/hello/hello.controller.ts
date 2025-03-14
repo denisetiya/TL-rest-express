@@ -6,7 +6,7 @@ import logger from '../../lib/lib.logger'
 const hello: Router = express.Router()
 
 hello.get('/', (req: Request, res: Response) => {
-  logger.info('Hello World')
+  logger.info(`Hello World ${req.path}`)
   return response(res, 200, undefined, 'Hello World', undefined)
 })
 

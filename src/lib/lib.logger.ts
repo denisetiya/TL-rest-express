@@ -1,21 +1,30 @@
-import winston from 'winston'
+import winston, { format } from 'winston'
 
 const logger = winston.createLogger({
   level: 'info',
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json(),
+  format: format.combine(
+    format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss',
+    }),
+    format.errors({ stack: true }),
+    format.splat(),
+    format.json(),
   ),
+  defaultMeta: { service: 'api-service' },
   transports: [
-    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'logs/combined.log' }),
-
+    // Tulis semua log ke console
     new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple(),
+      format: format.combine(
+        format.colorize(),
+        format.printf(({ timestamp, level, message, stack, ...meta }) => {
+          return `${timestamp} ${level}: ${message} ${stack ? '\n' + stack : ''} ${Object.keys(meta).length ? '\n' + JSON.stringify(meta, null, 2) : ''}`
+        }),
       ),
     }),
+    // Tulis semua log level error ke file error.log
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    // Tulis semua log ke file combined.log
+    new winston.transports.File({ filename: 'combined.log' }),
   ],
 })
 
