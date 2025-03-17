@@ -5,9 +5,9 @@
   "main": "src/app.ts",
   "scripts": {
     "dev": "pnpx ts-node-dev --respawn --rs --transpile-only src/app.ts",
-    "lint": "npx biome lint ./src",
-    "fix-lint": "npx biome lint --write --unsafe ./src",
-    "format": "npx biome format --write ./src",
+    "lint": "eslint ./src",
+    "fix-lint": "eslint --fix ./src",
+    "format": "prettier --write ./src",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
