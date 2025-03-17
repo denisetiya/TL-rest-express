@@ -1,4 +1,6 @@
 import winston, { format } from 'winston'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const logger = winston.createLogger({
   level: 'info',
@@ -10,7 +12,7 @@ const logger = winston.createLogger({
     format.splat(),
     format.json(),
   ),
-  defaultMeta: { service: 'api-service' },
+  defaultMeta: { app: 'api-service', env: process.env.NODE_ENV },
   transports: [
     // Tulis semua log ke console
     new winston.transports.Console({
